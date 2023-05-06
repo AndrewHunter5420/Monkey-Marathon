@@ -19,3 +19,8 @@ Shooting:
 Tips + Tricks:
 
 There are two main playstyles for “Monkey Marathon”, stealth and aggression. In aggression, you will focus on shooting and killing guards as you make your way through the level. Here, you will most likely focus on purchasing large amounts of health upgrades and weapons to become stronger at combat. In the stealth playstyle, you will focus on using “noise” to manipulate guards. Whenever the player sprints or shoots a pistol, shotgun, or AR, the noise will be created around the monkey, indicated by a white circle. If the player shoots the slingshot at a wall, a noise will be created at the point it hits the wall. If a guard hears a noise, they will go search the area for the monkey. If the monkey is in the guard's cone of vision, the guard will begin attacking the monkey. Stealth players should invest money on sneak speed, silencers, and the slingshot ability.
+
+Developer Commands:
+
+The following cheat commands are used for testing and if you only want to play for 10 seconds to get an idea of the game, not for regular play. Many of them will break the game.
+- g: Adds $__ when in game scene
