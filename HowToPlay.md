@@ -10,6 +10,7 @@ Controls:
 Movement 
 - Move around using WASD
 - Hold shift to sneak
+
 Shooting:
 - Shoot by pointing and clicking
 - Switch weapons by clicking the corresponding key on the hot bar
