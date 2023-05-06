@@ -4,14 +4,16 @@ Objective:
 
 Traverse your way up the map as far as you can without dying. When you reach the end of the floor, the staircase will take you to the next floor, acting as a checkpoint. There will be guards who will try to stop you by attacking, they will spawn at a higher rate after every floor.
 
+
 Controls:
 
-  Movement 
-  - Move around using WASD
-  - Hold shift to sneak
-  Shooting:
-  - Shoot by pointing and clicking
-  - Switch weapons by clicking the corresponding key on the hot bar
+Movement 
+- Move around using WASD
+- Hold shift to sneak
+Shooting:
+- Shoot by pointing and clicking
+- Switch weapons by clicking the corresponding key on the hot bar
+
 
 Tips + Tricks:
 
