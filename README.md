@@ -14,7 +14,7 @@ Context: This was a team project (3 people) for Introduction to Game Design (CIS
 
 Latest version of the game: v0.1
 
-Play our game yourself [here](...).
+Play our game yourself [here](https://play.unity.com/mg/other/monkey-marathon-v0-1).
 
 Read how to play [here](./HowToPlay.md).
 
