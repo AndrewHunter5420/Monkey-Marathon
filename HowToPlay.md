@@ -15,6 +15,8 @@ Shooting:
 - Shoot by pointing and clicking
 - Switch weapons by clicking the corresponding key on the hot bar
 
+There's no pause button, but you can use Delete to kill the player
+
 
 Tips + Tricks:
 
@@ -23,4 +25,5 @@ There are two main playstyles for “Monkey Marathon”, stealth and aggression.
 Developer Commands:
 
 The following cheat commands are used for testing and if you only want to play for 10 seconds to get an idea of the game, not for regular play. Many of them will break the game.
-- g: Adds $__ when in game scene
+- g: Adds $105 when in game scene
+- Delete: Kills the player, allowing you to go the main menu (there's no pause button)
