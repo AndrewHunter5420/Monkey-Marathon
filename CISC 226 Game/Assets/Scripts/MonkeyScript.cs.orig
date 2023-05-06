@@ -1,0 +1,291 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+
+public class MonkeyScript : MonoBehaviour
+{
+    public int maxHealth;
+    public int health;
+    public HealthBarScript healthBar;
+
+    public bool isDead;
+
+    public int sneakSpeed = 3;
+    public int sprintSpeed = 15;
+    private int moveSpeed;
+
+    public int maxPistolAmmo, pistolDmg, maxSlingshotAmmo, maxShotgunAmmo, shotgunDmg, maxARAmmo, ARDmg;
+    public int pistolAmmo, slingshotAmmo, shotgunAmmo, ARAmmo;
+
+    public GameObject ammoTextObject;
+    private TMP_Text ammoText;
+
+    public bool pistolPurchased, slingshotPurchased, shotgunPurchased, ARPurchased;
+
+    public Rigidbody2D rb;
+    public Camera cam;
+
+    Vector2 movement;
+    Vector2 mousePos;
+
+    private WeaponScript weaponscript;
+    private PistolButtonScript pistolbuttonscript;
+
+    public string weapon = "AR";
+    public float pistolCooldown = 0.5f;
+    public float slingshotCooldown = 1.5f;
+    public float shotgunCooldown = 1.3f;
+    public float ARCooldown = 0.4f;
+    private float currTime;
+    public bool loud = false;
+
+    public GameObject distanceTracker;
+    private DistanceScript distanceScript;
+
+    public GameObject goldTracker;
+    private GoldScript goldScript;
+
+<<<<<<< HEAD
+    public GameObject noise;
+=======
+    public GameObject DeathScreen;
+    private DeathScreenScript deathScript;
+>>>>>>> origin/Branch3
+
+    private void Start()
+    {
+        isDead = false;
+
+        currTime = 0f;
+        weaponscript = gameObject.GetComponent<WeaponScript>();
+<<<<<<< HEAD
+        pistolbuttonscript = gameObject.GetComponent<PistolButtonScript>();
+=======
+        distanceScript = distanceTracker.GetComponent<DistanceScript>();
+        goldScript = goldTracker.GetComponent<GoldScript>();
+        deathScript = DeathScreen.GetComponent<DeathScreenScript>();
+>>>>>>> origin/Branch3
+
+        pistolAmmo = maxPistolAmmo;
+        slingshotAmmo = maxSlingshotAmmo;
+        shotgunAmmo = maxShotgunAmmo;
+        ARAmmo = maxARAmmo;
+
+        ammoText = ammoTextObject.GetComponent<TMP_Text>();
+        switch (weapon)
+        {
+            case "pistol":
+                SetAmmoText(pistolAmmo, maxPistolAmmo);
+                break;
+            case "slingshot":
+                SetAmmoText(slingshotAmmo, maxSlingshotAmmo);
+                break;
+            case "shotgun":
+                SetAmmoText(shotgunAmmo, maxShotgunAmmo);
+                break;
+            case "AR":
+                SetAmmoText(ARAmmo, maxARAmmo);
+                break;
+        }
+    }
+
+    public void Restart()
+    {
+        isDead = false;
+        currTime = 0f;
+
+        gameObject.transform.position = new Vector2(0f, 0f);
+
+        setMaxHealth(maxHealth);
+
+        pistolAmmo = maxPistolAmmo;
+        slingshotAmmo = maxSlingshotAmmo;
+        shotgunAmmo = maxShotgunAmmo;
+        ARAmmo = maxARAmmo;
+
+        switch (weapon)
+        {
+            case "pistol":
+                SetAmmoText(pistolAmmo, maxPistolAmmo);
+                break;
+            case "slingshot":
+                SetAmmoText(slingshotAmmo, maxSlingshotAmmo);
+                break;
+            case "shotgun":
+                SetAmmoText(shotgunAmmo, maxShotgunAmmo);
+                break;
+            case "AR":
+                SetAmmoText(ARAmmo, maxARAmmo);
+                break;
+        }
+    }
+
+    void Update()
+    {
+        if (!isDead)
+        {
+            // dev commands for testing:
+            if (Input.GetKeyDown(KeyCode.Delete))
+            {
+                Dies();
+            }
+
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+
+<<<<<<< HEAD
+                currTime = Time.time + pistolCooldown;
+                //loud = true;
+                if (pistolbuttonscript.silencerPurchased == false) //checks if silencer purchased
+                {
+                    GameObject gunSound = Instantiate(noise, transform.position, weaponscript.firePoint.rotation * Quaternion.Euler(0f, 0f, 180f));
+                }
+                //Destroy(gunSound, 0.5f);
+=======
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+            if (Input.GetKeyDown(KeyCode.Alpha1) && pistolPurchased == true)
+            {
+                weapon = "pistol";
+                SetAmmoText(pistolAmmo, maxPistolAmmo);
+>>>>>>> origin/Branch3
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && slingshotPurchased == true)
+            {
+                weapon = "slingshot";
+                SetAmmoText(slingshotAmmo, maxSlingshotAmmo);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && shotgunPurchased == true)
+            {
+                weapon = "shotgun";
+                SetAmmoText(shotgunAmmo, maxShotgunAmmo);
+<<<<<<< HEAD
+                //loud = true;
+                GameObject gunSound = Instantiate(noise, transform.position, weaponscript.firePoint.rotation * Quaternion.Euler(0f, 0f, 180f));
+                //Destroy(gunSound, 0.5f);
+=======
+
+>>>>>>> origin/Branch3
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && ARPurchased == true)
+            {
+                weapon = "AR";
+                SetAmmoText(ARAmmo, maxARAmmo);
+<<<<<<< HEAD
+                //loud = true;
+                GameObject gunSound = Instantiate(noise, transform.position, weaponscript.firePoint.rotation * Quaternion.Euler(0f, 0f, 180f));
+                //Destroy(gunSound, 0.5f);
+=======
+            }
+
+            // Weapon Fire:
+            if (Input.GetButton("Fire1"))
+            {
+                if (weapon == "pistol" && currTime <= Time.time && pistolAmmo > 0)
+                {
+                    weaponscript.pistolShoot();
+
+                    pistolAmmo--;
+                    SetAmmoText(pistolAmmo, maxPistolAmmo);
+
+                    currTime = Time.time + pistolCooldown;
+                    loud = true;
+                }
+                else if (weapon == "slingshot" && currTime <= Time.time && slingshotAmmo > 0)
+                {
+                    weaponscript.slingshotShoot();
+
+                    slingshotAmmo--;
+                    SetAmmoText(slingshotAmmo, maxSlingshotAmmo);
+
+                    currTime = Time.time + slingshotCooldown;
+                }
+                else if (weapon == "shotgun" && currTime <= Time.time && shotgunAmmo > 0)
+                {
+                    currTime = Time.time + shotgunCooldown;
+                    StartCoroutine(weaponscript.shotgunShoot());
+
+                    shotgunAmmo--;
+                    SetAmmoText(shotgunAmmo, maxShotgunAmmo);
+
+                    loud = true;
+                }
+                else if (weapon == "AR" && currTime <= Time.time && ARAmmo > 0)
+                {
+                    currTime = Time.time + ARCooldown;
+                    StartCoroutine(weaponscript.ARShoot());
+
+                    ARAmmo--;
+                    SetAmmoText(ARAmmo, maxARAmmo);
+
+                    loud = true;
+                }
+            }
+            // Movement:
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                moveSpeed = sneakSpeed;
+                loud = false;
+            }
+            else
+            {
+                moveSpeed = sprintSpeed;
+                loud = true;
+>>>>>>> origin/Branch3
+            }
+        }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isDead)
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
+
+            Vector2 lookDir = mousePos - rb.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+            rb.rotation = angle;
+        }
+    }
+
+    private void SetAmmoText(int ammo, int maxAmmo)
+    {
+        ammoText.text = ammo + "/" + maxAmmo;
+    }
+
+    public void setMaxHealth(int setHealthTo)
+    {
+        maxHealth = setHealthTo;
+        health = setHealthTo;
+
+        healthBar.SetMaxHealth(setHealthTo);
+    }
+
+    public void takeDmg(int dmg)
+    {
+        if (!isDead)
+        {
+            health -= dmg;
+            healthBar.SetHealth(health);
+            if (health <= 0)
+            {
+                Dies();
+            }
+        }
+    }
+
+    public void Dies()
+    {
+        isDead = true;
+        
+        int distanceTravelled = distanceScript.distanceTravelled;
+        goldScript.saveGold(distanceTravelled);
+
+        PlayerPrefs.SetString("lastWeapon", weapon);
+
+        deathScript.OpenDeathScreen(distanceTravelled, goldScript.coinsPickedUp);
+    }
+}
